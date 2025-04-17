@@ -46,5 +46,11 @@ resource "aws_eks_node_group" "main" {
     aws_iam_role_policy_attachment.example-AmazonEC2ContainerRegistryReadOnly,
   ]
 
-  tags = merge(local.tags, { Name = local.name_prefix })
+  tags = merge(
+    local.tags,
+    {
+      Name = local.name_prefix
+      "kubernetes.io/cluster/${aws_eks_cluster.main.name}" = "${local.name_prefix}-worker-node"
+    }
+  )
 }
