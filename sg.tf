@@ -20,12 +20,12 @@ resource "aws_security_group" "cluster" {
   }
 }
 
-resource "aws_security_group_rule" "main" {
-  depends_on        = [aws_eks_cluster.main]
-  type              = "ingress"
-  from_port         = 443
-  to_port           = 443
-  protocol          = "tcp"
-  cidr_blocks       = var.sg_ingress_cidr
-  security_group_id = data.aws_eks_cluster.cluster.vpc_config[0]["cluster_security_group_id"]
-}
+# resource "aws_security_group_rule" "main" {
+#   depends_on        = [aws_eks_cluster.main]
+#   type              = "ingress"
+#   from_port         = 443
+#   to_port           = 443
+#   protocol          = "tcp"
+#   cidr_blocks       = var.sg_ingress_cidr
+#   security_group_id = data.aws_eks_cluster.cluster.vpc_config[0]["cluster_security_group_id"]
+# }
