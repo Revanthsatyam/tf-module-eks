@@ -19,3 +19,12 @@ resource "aws_security_group" "cluster" {
     ipv6_cidr_blocks = ["::/0"]
   }
 }
+
+# resource "aws_security_group_rule" "main" {
+#   type              = "ingress"
+#   from_port         = 443
+#   to_port           = 443
+#   protocol          = "tcp"
+#   cidr_blocks       = var.sg_ingress_cidr
+#   security_group_id = aws_eks_cluster.main.
+# }
