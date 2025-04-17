@@ -28,6 +28,7 @@ resource "aws_eks_node_group" "main" {
   node_role_arn   = aws_iam_role.worker.arn
   subnet_ids      = var.subnet_ids
   capacity_type   = "SPOT"
+  instance_types = ["t3.medium"]
 
   scaling_config {
     desired_size = 2
@@ -44,4 +45,6 @@ resource "aws_eks_node_group" "main" {
     aws_iam_role_policy_attachment.example-AmazonEKS_CNI_Policy,
     aws_iam_role_policy_attachment.example-AmazonEC2ContainerRegistryReadOnly,
   ]
+
+  tags = merge(local.tags, { Name = local.name_prefix })
 }
