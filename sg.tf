@@ -21,6 +21,7 @@ resource "aws_security_group" "cluster" {
 }
 
 resource "aws_security_group_rule" "main" {
+  depends_on        = [aws_eks_cluster.main]
   type              = "ingress"
   from_port         = 443
   to_port           = 443
