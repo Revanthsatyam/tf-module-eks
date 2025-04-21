@@ -1,3 +1,3 @@
 output "eks_cluster" {
-  value = data.tls_certificate.oidc_cert
+  value = aws_iam_openid_connect_provider.main
 }
