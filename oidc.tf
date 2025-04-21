@@ -12,7 +12,7 @@ locals {
   thumbprint = chomp(
     base64encode(
       sha1(
-        data.tls_certificate.oidc_cert.certificates
+        data.tls_certificate.oidc_cert.certificates[0].certificate_pem
       )
     )
   )
