@@ -78,4 +78,28 @@ resource "aws_iam_role" "parameters" {
       }
     ]
   })
+
+  inline_policy {
+    name = "${local.name_prefix}-parameters-sa-policy"
+
+    policy = jsonencode({
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ssm:GetParameter",
+            "ssm:GetParameters",
+            "ssm:GetParametersByPath",
+            "ssm:GetParameterHistory",
+            "kms:Decrypt"
+          ],
+          "Resource": [
+            "arn:aws:ssm:us-east-1:058264090525:parameter/*",
+            var.kms_key
+          ]
+        }
+      ]
+    })
+  }
 }
