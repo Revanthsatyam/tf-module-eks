@@ -58,24 +58,24 @@ resource "aws_iam_role_policy_attachment" "example-AmazonEC2ContainerRegistryRea
   role       = aws_iam_role.worker.name
 }
 
-# resource "aws_iam_role" "parameters" {
-#   depends_on = [aws_iam_openid_connect_provider.main]
-#   name = "${local.name_prefix}-eks-parameters-role"
-#   assume_role_policy = jsonencode({
-#     "Version": "2012-10-17",
-#     "Statement": [
-#       {
-#         "Effect": "Allow",
-#         "Principal": {
-#           "Federated": "arn:aws:iam::058264090525:oidc-provider/${aws_iam_openid_connect_provider.main.url}"
-#         },
-#         "Action": "sts:AssumeRoleWithWebIdentity",
-#         "Condition": {
-#           "StringEquals": {
-#             "oidc.eks.us-east-1.amazonaws.com/id/2EE7A8CF5F52C758FC17214FA628AE75:aud": "sts.amazonaws.com"
-#           }
-#         }
-#       }
-#     ]
-#   })
-# }
+resource "aws_iam_role" "parameters" {
+  depends_on = [aws_iam_openid_connect_provider.main]
+  name = "${local.name_prefix}-eks-parameters-role"
+  assume_role_policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "Federated": "arn:aws:iam::058264090525:oidc-provider/${aws_iam_openid_connect_provider.main.url}"
+        },
+        "Action": "sts:AssumeRoleWithWebIdentity",
+        "Condition": {
+          "StringEquals": {
+            "${aws_iam_openid_connect_provider.main.url}:aud": "sts.amazonaws.com"
+          }
+        }
+      }
+    ]
+  })
+}
