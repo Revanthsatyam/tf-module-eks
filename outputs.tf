@@ -1,3 +1,3 @@
 output "eks_cluster" {
-  value = aws_eks_cluster.main.identity[0].oidc[0]["issuer"]
+  value = data.tls_certificate.oidc_cert
 }
