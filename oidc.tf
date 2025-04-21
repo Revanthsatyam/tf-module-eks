@@ -7,7 +7,7 @@ data "tls_certificate" "oidc_cert" {
   url = jsondecode(data.http.oidc_metadata.response_body)["issuer"]
 }
 
-# Generate the thumbprint from the certificate
+# Generate the thumbprint from the first certificate in the list
 locals {
   thumbprint = chomp(
     base64encode(
