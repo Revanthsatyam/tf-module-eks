@@ -60,7 +60,7 @@ resource "aws_iam_role_policy_attachment" "example-AmazonEC2ContainerRegistryRea
 
 resource "aws_iam_role" "parameters" {
   depends_on = [aws_iam_openid_connect_provider.main]
-  name = "${local.name_prefix}-eks-parameters-role"
+  name = "${local.name_prefix}-parameters-sa-role"
   assume_role_policy = jsonencode({
     "Version": "2012-10-17",
     "Statement": [
